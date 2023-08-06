@@ -8,7 +8,6 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import nl.hybris.acorelcx.core.model.EUWeatherModel;
 import nl.hybris.acorelcx.core.weather.dao.EUWeatherDao;
-import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
 
@@ -16,7 +15,6 @@ public class DefaultEUWeatherDao extends DefaultGenericDao<EUWeatherModel> imple
     public DefaultEUWeatherDao(String typecode) {
         super(typecode);
     }
-
     private ModelService modelService;
     private FlexibleSearchService flexibleSearchService;
 
@@ -46,7 +44,6 @@ public class DefaultEUWeatherDao extends DefaultGenericDao<EUWeatherModel> imple
             throw new RuntimeException(e);
         }
     }
-
 
     public ModelService getModelService() {
         return modelService;

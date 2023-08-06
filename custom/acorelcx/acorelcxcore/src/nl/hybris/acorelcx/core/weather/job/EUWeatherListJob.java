@@ -23,13 +23,10 @@ import java.util.UUID;
 
 public class EUWeatherListJob extends AbstractJobPerformable<EUWeatherListJobModel> {
     private static final Logger LOG = Logger.getLogger(EUWeatherListJob.class);
-
     private DefaultEUWeatherService EUWeatherService;
-
     @Override
     public PerformResult perform(EUWeatherListJobModel euWeatherListJobModel) {
 
-        //List<ResultList> resultList = new ArrayList<>();
         // Create a city name list
         List<String> cities = getCitiesList();
         List<EUWeatherModel> modelList = new ArrayList<>();
@@ -51,7 +48,6 @@ public class EUWeatherListJob extends AbstractJobPerformable<EUWeatherListJobMod
                     Gson gson = new Gson();
                     // Map the JSON string to a Java object.
                     Temperature temp = gson.fromJson(response, Temperature.class);
-
                     EUWeatherModel euWeatherModel = new EUWeatherModel();
 
                     euWeatherModel.setCode(alphaNumericCreater());
@@ -61,11 +57,8 @@ public class EUWeatherListJob extends AbstractJobPerformable<EUWeatherListJobMod
                     euWeatherModel.setDescription(temp.getWeather().get(0).getDescription());
                     euWeatherModel.setMain(temp.getWeather().get(0).getMain());
 
-                    // Save the cronjob data to a Hybris table.
-
                     modelList.add(euWeatherModel);
 
-                    //resultList = createTempListForBackoffice(temp, resultList);
                 }
             }catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -75,14 +68,12 @@ public class EUWeatherListJob extends AbstractJobPerformable<EUWeatherListJobMod
         }
         if(getEUWeatherService().deleteAll()){
             getEUWeatherService().saveEuWeather(modelList);
+            LOG.info(modelList);
             return new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
 
         }
-
         return new PerformResult(CronJobResult.FAILURE, CronJobStatus.ABORTED);
     }
-
-
 
     private static float convertKelvinToCelcius(float kelvin){
         return kelvin - 273;

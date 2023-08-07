@@ -1,3 +1,5 @@
+**The development, which consumes the openweathermap.org api's and brings the weather information of 4 cities(can increase) in the Netherlands to the backoffice cockpit (EU Weather) screen**
+
 Setup
 -----
 

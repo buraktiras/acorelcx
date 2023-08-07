@@ -1,5 +1,7 @@
 **The development, which consumes the openweathermap.org api's and brings the weather information of 4 cities(can increase) in the Netherlands to the backoffice cockpit (EU Weather) screen**
 
+**Data can be manually updated from the Cronjob screen in the Backoffice tree with the "EUWeatherCronJob" trigger, or from the "EU Weather" screen under the Marketing subheading. If no manual action is taken, the cronjob will automatically update every hour.**
+
 Setup
 -----
 
